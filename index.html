@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cities</title>
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body>
+        <header>
+            <h1> Cities </h1>
+        </header>
+
+        <main>
+            <section id="section1">
+
+                <div class="headersSection">
+                    <h3>List of cities</h3>
+                </div>
+
+                <div class="contentSection cityBoxContainer">
+                    <div class="cityBoxDelete cityBox">
+                        <p class="cityBoxText">Lille, France</p>
+                        <button class=btnListOfCity>Delete</button>
+                    </div>
+                    <div class="cityBoxDelete cityBox">
+                        <p class="cityBoxText">Nantes, France</p>
+                        <button class=btnListOfCity>Delete</button>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+            <section id="section2">
+
+                <div class="headersSection">
+                    <h3>Add a city</h3>
+                </div>
+
+                <div class="inputField addCityField">
+                    <div class="userInputContainer UIAddCityName">
+                        <p>Name:</p>
+                        <input type="text" class="userInputField">
+                    </div>
+                    <div  class="userInputContainer UIAddCityCountry">
+                        <p>Country:</p>
+                        <input type="text" class="userInputField">
+                    </div>
+                </div>
+
+                <button class="btnInteraction">
+                    <p>Add City</p>
+                </button>
+
+
+            </section>
+
+
+
+
+            <section id="section3">
+
+                <div class="headersSection">
+                    <h3>Search for a city</h3>
+                </div>
+
+                <div class="searchField inputField">
+                    <div class="userInputContainer UISearchCityName">
+                        <p>City:</p>
+                        <input type="text" class="userInputField">
+                    </div>
+                    <div class="userInputContainer UISearchCityCountry">
+                        <p>Country:</p>
+                        <input type="text" class="userInputField">
+                    </div>
+                </div>
+
+                <button class="btnInteraction">
+                    <p>Search Cities</p>
+                </button>
+
+                <div class="searchHitsField cityBoxContainer">
+
+                    <div class="searchBox cityBox">
+                        <p class="cityBoxText">Berlin, Germany</p>
+                    </div>
+                </div>
+
+            </section>
+
+
+        </main>
+
+        <script src="server.js"></script>
+        <script src="index.js"></script>
+    </body>
+
+</html>

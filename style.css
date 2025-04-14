@@ -1,0 +1,120 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+section {
+    background-color: aliceblue;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+}
+
+.inputField {
+    display: flex;
+    flex-direction: column;
+    background-color: beige;
+    padding: 10px;
+    border-radius: 5px;
+    gap: 10px;
+}
+
+.userInputField {
+    all: unset;
+    border-bottom: 1px solid black;
+    flex: 1;
+    min-width: 0;
+}
+
+.userInputField:hover {
+    cursor: pointer;
+    border-bottom: 1px solid rgba(2, 2, 2, 0.453);
+}
+
+.headersSection {
+    text-align: center;
+}
+
+.userInputContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.userInputContainer>p {
+    margin: 0;
+}
+
+.cityBoxText {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+
+.btnInteraction {
+    background-color: #4CAF50;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+
+.btnInteraction:hover {
+    cursor: pointer;
+    background-color: #3f9242;
+}
+
+.searchHitsField {
+    overflow: scroll;
+}
+
+.cityBox {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(223, 199, 240);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.cityBox>p {
+    margin: 5px 10px;
+}
+
+.cityBoxContainer {
+    background-color: rgb(190, 245, 231);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.btnListOfCity {
+    background-color: rgb(210, 5, 5);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.btnListOfCity:hover {
+    cursor: pointer;
+    background-color: rgb(176, 2, 2);
+}

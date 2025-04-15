@@ -18,9 +18,3 @@ const cities = [
   { id: 38, name: "Maribor", country: "Slovenia"},
   { id: 42, name: "Strasbourg", country: "France"},
 ];
-
-
-function handler (request) {
-
-
-}

@@ -114,7 +114,7 @@ section {
     border-radius: 5px;
 }
 
-.btnListOfCity:hover {
+.btnDelete:hover {
     cursor: pointer;
     background-color: rgb(176, 2, 2);
 }

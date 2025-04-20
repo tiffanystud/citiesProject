@@ -81,6 +81,7 @@ section {
 }
 
 .searchHitsField {
+    height: 100px;
     overflow: scroll;
 }
 

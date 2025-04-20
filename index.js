@@ -1,5 +1,5 @@
 function init() {
-    fetch("http://localhost:8000/cities")
+    fetch("http://localhost:8080/cities")
         .then(handleResponse)
         .then(showCities)
         .catch(handleError);
@@ -13,10 +13,11 @@ function handleResponse(response) {
 }
 
 function handleError(error) {
-    console.error("ERROR", error);
+    console.log("ERROR", error);
 }
 
 function showCities(allCities) {
+
     const cityContainerDOM = document.querySelector(".cityBoxContainer");
     cityContainerDOM.innerHTML = "";
 
@@ -43,6 +44,7 @@ function addCity() {
 
     if (!cityNameInput || !countryNameInput) {
         alert("Name and country are required.");
+        clearUserFields();
         return;
     }
 
@@ -51,7 +53,7 @@ function addCity() {
         country: countryNameInput
     };
 
-    fetch("http://localhost:8000/cities", {
+    fetch("http://localhost:8080/cities", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -60,20 +62,32 @@ function addCity() {
     })
         .then(response => {
             if (!response.ok) {
-                if (response.status === 400) alert("Missing fields.");
-                else if (response.status === 409) alert("City already exists.");
+                if (response.status === 400) {
+
+                    alert("Missing fields.")
+                    clearUserFields();
+
+                } else if (response.status === 409) {
+
+                    alert("City already exists.")
+                    clearUserFields();
+
+                };
+
+                clearUserFields();
                 throw new Error("Failed to add city");
             }
             return response.json();
         })
         .then(init)
         .catch(handleError);
+    clearUserFields();
 }
 
 function deleteCity(event) {
-    const cityIdFromBtn = event.target.id.split('cityId-')[1];
+    const cityIdFromBtn = event.currentTarget.id.split('cityId-')[1];
 
-    fetch(`http://localhost:8000/cities/${cityIdFromBtn}`, {
+    fetch(`http://localhost:8080/cities`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: Number(cityIdFromBtn) })
@@ -94,25 +108,28 @@ function searchCities() {
     const countryNameInput = document.querySelector(".UISearchCityCountry input").value.trim();
 
     if (!cityNameInput) {
-        alert("Search text is required.");
+        alert("Name of city is required.");
+        clearUserFields();
         return;
     }
 
-    const params = new URLSearchParams({ text: cityNameInput });
-    
+    const searchParams = {
+        city: cityNameInput
+    };
+
     if (countryNameInput) {
-        params.append("country", countryNameInput);
+        searchParams.country = countryNameInput;
     }
 
-    fetch(`http://localhost:8000/cities/search?${params.toString()}`)
-        .then(response => {
-            if (response.status === 400) {
-                alert("Search parameter 'text' is required.");
-                return [];
-            }
+    const params = new URLSearchParams(searchParams);
+
+    fetch("http://localhost:8080/cities/search?" + params.toString())
+        .then(function (response) {
             return response.json();
         })
-        .then(showSearchHits)
+        .then(function (filteredCities) {
+            showSearchHits(filteredCities);
+        })
         .catch(handleError);
 }
 
@@ -132,6 +149,14 @@ function showSearchHits(filteredCities) {
 
         searchContainer.appendChild(newCityBoxSearch);
     }
+}
+
+function clearUserFields() {
+    const UIFiellds = document.querySelectorAll(".userInputField input");
+   
+    UIFiellds.forEach(currInput => {
+        currInput.value = "";
+    })
 }
 
 document.querySelector(".btnAdd").addEventListener("click", addCity);

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body class="bodyTest">
+        <main class="mainTest">
+            <header class="headerTest">
+                <h1>TESTS</h1>
+                <p>Create, Read, Delete</p>
+            </header>
+
+            <section class="testContainers testContainer1">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 1</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <p class="methodText">GET</p>
+                        <p class="endpointText">/cities</p>
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">This test sends a <span class="requestSummary boxText">GET</span> request to <span class="requestSummary boxText">/cities</span>. The expected response status is <span class="requestSummary boxText">200</span>.</span>
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Request all initial cities</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testContainers testContainer2">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 2</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <p class="methodText">POST</p>
+                        <p class="endpointText">/cities</p>
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">This test sends a <span class="requestSummary boxText">POST</span> request to <span class="requestSummary boxText">/cities</span> with body: {name: "Malmö", country: "Sweden"}. The expected response status is <span class="requestSummary boxText">200</span> and response-body: {id: 43, name: "Malmö", country: "Sweden"}.</span>
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Add new city</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testContainers testContainer3">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 3</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <p class="methodText ">DELETE</p>
+                        <p class="endpointText">/cities</p>
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">This test sends a <span class="requestSummary boxText">DELETE</span> request to <span class="requestSummary boxText">/cities</span> with body: {id: 2}. The expected response status is <span class="requestSummary boxText">200</span> and response-body: "Delete OK".</span>
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Delete city with ID 2</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testContainers testContainer4">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 4</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <p class="methodText ">GET</p>
+                        <p class="endpointText">/cities</p>
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">This test sends a <span class="requestSummary boxText">GET</span> request to <span class="requestSummary boxText">/cities</span>. The expected response status is <span class="requestSummary boxText">200</span> and the response-body should be an array of all initial cities, including Malmö and excluding Lille.</span>
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Request all current cities (after changes)</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testContainers testContainer5">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 5</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <p class="methodText ">GET</p>
+                        <p class="endpointText">/cities/43</p>
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">This test sends a <span class="requestSummary boxText">GET</span> request to <span class="requestSummary boxText">/cities/43</span>. The expected response status is <span class="requestSummary boxText">200</span> and the response-body: {id: 43, name: "Malmö", country: "Sweden"}.</span>
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Get specific city by ID</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testContainers testContainer6">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 6</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <p class="methodText ">GET</p>
+                        <p class="endpointText">/cities/search?city=en</p>
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">This test sends a <span class="requestSummary boxText">GET</span> request to <span class="requestSummary boxText">/cities/search?city=en</span>. The expected response status is <span class="requestSummary boxText">200</span> and response-body include cities: Bremen, Dresden, Venice, Ghent.</span>
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Search for cities by text</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testContainers testContainer7">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 7</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <p class="methodText ">GET</p>
+                        <p class="endpointText">/cities/search?city=en&amp;country=Sweden</p>
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">This test sends a <span class="requestSummary boxText">GET</span> request to <span class="requestSummary boxText">/cities/search?city=en&amp;country=Sweden</span>. The expected response status is <span class="requestSummary boxText">200</span> and the response-body should be an empty array [].</span>
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Search for cities by text and country</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testContainers testContainer8">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 8 (invalid)</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <input type="text" class="methodText" placeholder="Method" />
+                        <input type="text" class="endpointText" placeholder="/Endpoint" />
+                        <input type="text" class="requestBodyText" placeholder="{Request-Body}" />
+
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">
+                        This test sends a <span class="requestSummary boxText">[METHOD]</span> request to
+                        <span class="requestSummary boxText">[ENDPOINT]</span>.
+                        The expected response status is <span class="requestSummary boxText">400</span>.
+                    </span>
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Custom endpoint test</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testContainers testContainer9">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 9 (invalid)</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <p class="methodText ">POST</p>
+                        <p class="endpointText">/cities</p>
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">This test sends a <span class="requestSummary boxText">POST</span> request to <span class="requestSummary boxText">/cities</span> with a existing city as request-body. The expected response status is <span class="requestSummary boxText">409</span> and the response-body should be an empty array [].</span>
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Send a post request for an existing city</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testContainers testContainer10">
+                <div class="headerSection">
+                    <h3 class="testHeader">Test 10 (invalid)</h3>
+                    <div class="methodEndpontContainer boxText">
+                        <p class="methodText ">DELETE</p>
+                        <p class="endpointText">/cities</p>
+                    </div>
+                </div>
+                <div class="mainSection">
+                    <span class="requestSummary">This test sends a <span class="requestSummary boxText">DELETE</span> request to <span class="requestSummary boxText">/cities</span> with request-body: {id: 56}. The expected response status is <span class="requestSummary boxText">404</span> 
+                </div>
+                <div class="footerSection">
+                    <p class="typeOfRequestText">Send an delete request with a non existing ID</p>
+                    <div class="buttonContainer">
+                        <p class="responseText"></p>
+                        <button class="btnTest">Run test</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <script src="test.js"></script>
+    </body>
+
+</html>

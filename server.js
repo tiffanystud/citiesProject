@@ -29,22 +29,22 @@ async function handler(req) {
 
   const reqMethod = req.method;
   const reqUrl = new URL(req.url);
+
   const reqPathname = reqUrl.pathname;
   const reqParamCity = reqUrl.searchParams.get("city");
   const reqParamCountry = reqUrl.searchParams.get("country");
 
   if (reqUrl.pathname === "/" || reqUrl.pathname === "/index.html") {
-    // ***
-    const html = await Deno.readTextFile("index.html");
-    return new Response(html, {
+    const htmlFile = await Deno.readTextFile("index.html");
+    return new Response(htmlFile, {
       status: 200,
       headers: { "Content-Type": "text/html", ...headersCORS },
     });
   }
 
   if (reqUrl.pathname === "/style.css") {
-    const css = await Deno.readTextFile("style.css");
-    return new Response(css, {
+    const cssFile = await Deno.readTextFile("style.css");
+    return new Response(cssFile, {
       status: 200,
       headers: { "Content-Type": "text/css", ...headersCORS },
     });
@@ -58,12 +58,29 @@ async function handler(req) {
     });
   }
 
+  if (reqUrl.pathname === "/test.html") {
+    const testFile = await Deno.readTextFile("test.html");
+    return new Response(testFile, {
+      status: 200,
+      headers: { "Content-Type": "text/html", ...headersCORS }
+    });
+  }
+
+  if (reqUrl.pathname === "/test.js") {
+    const testJsFile = await Deno.readTextFile("test.js");
+    return new Response(testJsFile, {
+      status: 200,
+      headers: { "Content-Type": "application/javascript", ...headersCORS }
+    });
+  }
+
+
 
   if (reqMethod == "GET") {
 
     if (reqPathname === "/cities/search") {
       if (!reqParamCity) {
-        return new Response(JSON.stringify("Missing 'city' parameter"), {
+        return new Response(JSON.stringify({ message: "Enter a city name." }), {
           status: 400,
           headers: { "Content-Type": "application/json", ...headersCORS }
         });
@@ -87,10 +104,10 @@ async function handler(req) {
 
     if (reqPathname.startsWith("/cities/")) {
       const id = parseInt(reqPathname.split("/")[2]);
-      const city = cities.find(cuurr => cuurr.id === id);
-     
+      const city = cities.find(curr => curr.id === id);
+
       if (!city) {
-        return new Response("City not found", {
+        return new Response(JSON.stringify({ message: "No city found." }), {
           status: 404,
           headers: { "Content-Type": "application/json", ...headersCORS }
         });
@@ -124,25 +141,11 @@ async function handler(req) {
 
   if (reqMethod == "POST") {
 
-    if (reqPathname == "/message") {
-      const messageObj = {
-        from: 2,
-        to: 1,
-        password: "pass"
-      }
-
-      return new Response(JSON.stringify(messageObj), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...headersCORS }
-      })
-
-    }
-
     if (reqPathname == "/cities") {
       const reqBody = await req.json();
 
       if (!reqBody.name || !reqBody.country) {
-        return new Response(JSON.stringify("Missing fields."), {
+        return new Response(JSON.stringify({ message: "Missing either city or country" }), {
           status: 400,
           headers: { "Content-Type": "application/json", ...headersCORS }
         });
@@ -151,47 +154,58 @@ async function handler(req) {
       const existingCity = cities.some(currCity => currCity.name.toLowerCase() === reqBody.name.toLowerCase());
 
       if (existingCity) {
-        return new Response(JSON.stringify("The city already exists."), {
+        return new Response(JSON.stringify([]), {
           status: 409,
           headers: { "Content-Type": "application/json", ...headersCORS }
         });
       }
 
-      let maxIdOfCity = 0;
-      for (const currCity of cities) {
-        if (currCity.id > maxIdOfCity) {
-          maxIdOfCity = currCity.id;
+      if (reqBody.name || reqBody.country) {
+        let maxIdOfCity = 0;
+        for (const currCity of cities) {
+          if (currCity.id > maxIdOfCity) {
+            maxIdOfCity = currCity.id;
+          }
         }
+
+        const newCityObj = {
+          id: maxIdOfCity + 1,
+          name: reqBody.name,
+          country: reqBody.country
+        };
+
+        cities.push(newCityObj);
+
+        return new Response(JSON.stringify(newCityObj), {
+          status: 200,
+          headers: { "Content-Type": "application/json", ...headersCORS }
+        });
       }
 
-      const newCityObj = {
-        id: maxIdOfCity + 1,
-        name: reqBody.name,
-        country: reqBody.country
-      };
-
-      cities.push(newCityObj);
-
-      return new Response(JSON.stringify(newCityObj), {
-        status: 200,
-        headers: { "Content-Type": "application/json", ...headersCORS }
-      });
     }
 
   }
 
-
   if (reqMethod == "DELETE") {
 
     if (reqPathname == "/cities") {
-      const reqBody = await req.json();
 
-      if (!reqBody.id) {
-        return new Response(JSON.stringify("Missing an ID"), {
+      let reqBody = {} 
+      let requestWithoutBody = false;
+    
+      if (req.headers.get("Content-Length") > 0  ) {
+        reqBody = await req.json();
+      } else {
+        requestWithoutBody = true;
+      }
+    
+      if (!reqBody.id || requestWithoutBody) {
+        return new Response(JSON.stringify({ message: "Missing city ID." }), {
           status: 400,
           headers: { "Content-Type": "application/json", ...headersCORS }
         })
       }
+
 
       let cityInx = -1;
 
@@ -203,33 +217,29 @@ async function handler(req) {
       }
 
       if (cityInx == -1) {
-        return new Response(JSON.stringify("No matching ID found."), {
+        return new Response(JSON.stringify({ message: "No matching city ID found." }), {
           status: 404,
           headers: { "Content-Type": "application/json", ...headersCORS }
         });
       } else {
 
-        cities.splice(cityInx, 1); // ***
+        cities.splice(cityInx, 1);
 
-        return new Response(JSON.stringify("Delete OK"), {
+        return new Response(JSON.stringify({ message: "Delete OK" }), {
           status: 200,
           headers: { "Content-Type": "application/json", ...headersCORS }
         })
       }
     }
 
-    if (reqPathname == "/cities" /* *** */) {
-
-    }
-
     if (reqPathname == "/mordor") {
-      return new Response(JSON.stringify("Invalid endpoint."), {
+      return new Response(JSON.stringify({ message: "Invalid endpoint." }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...headersCORS }
       })
     }
 
-    return new Response(JSON.stringify("Invalid endpoint."), {
+    return new Response(JSON.stringify({ message: "Invalid endpoint." }), {
       status: 400,
       headers: { "Content-Type": "application/json", ...headersCORS }
     })
@@ -237,7 +247,7 @@ async function handler(req) {
   }
 
 
-  return new Response(JSON.stringify(""), {
+  return new Response(JSON.stringify({ message: "Invalid endpoint." }), {
     status: 400,
     headers: { "Content-Type": "application/json", ...headersCORS }
   })
@@ -245,4 +255,4 @@ async function handler(req) {
 
 }
 
-Deno.serve({ port: 8080 }, handler)
+Deno.serve(handler)

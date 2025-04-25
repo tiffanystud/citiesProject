@@ -1,22 +1,31 @@
-body {
+.bodyInx {
+    margin: 10%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 30px;
 }
 
-header {
+.headerInx {
     text-align: center;
 }
 
-main {
+.footerInx {
+    text-align: center;
+    background-color: aliceblue;
+    border-radius: 5px;
+
+}
+
+.mainInx {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 10px;
 }
 
-section {
-    background-color: aliceblue;
+.sectionInx {
+    background-color: green;
+    /* *** */
     flex: 1 1 0;
     min-width: 0;
     padding: 10px;
@@ -80,11 +89,6 @@ section {
     background-color: #3f9242;
 }
 
-.searchHitsField {
-    height: 100px;
-    overflow: scroll;
-}
-
 .cityBox {
     display: flex;
     justify-content: space-between;
@@ -106,6 +110,15 @@ section {
     gap: 5px;
     padding: 10px 20px;
     border-radius: 5px;
+    overflow: scroll;
+}
+
+.searchHitsField {
+    height: 100px;
+}
+
+.listOfCitiesContainer {
+    height: 235px;
 }
 
 .btnDelete {
@@ -119,3 +132,86 @@ section {
     cursor: pointer;
     background-color: rgb(176, 2, 2);
 }
+
+
+
+/* ----------------------------------- TEST ---------------------------------- */
+
+
+
+
+.bodyTest {
+    display: flex;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+
+.mainTest {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.headerTest {
+    display: flex;
+    flex-direction: column;
+}
+
+.testContainers {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: rgb(235, 250, 255);
+
+    border: 1px solid gray;
+    padding: 5px;
+    width: 700px;
+}
+
+.headerSection {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.methodEndpontContainer {
+    display: flex;
+}
+
+.mainSection {
+    display: flex;
+    padding: 10px 0px;
+}
+
+
+.footerSection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonContainer {
+    display: flex;
+}
+
+.btnTest {
+    background-color: deepskyblue;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.btnTest:hover {
+    background-color: rgb(1, 164, 218);
+}
+
+
+.boxText {
+    background-color: ghostwhite;
+    border-radius: 5px;
+    border: 1px solid darkgray;
+    padding: 3px;
+
+}
+
